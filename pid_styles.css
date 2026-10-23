@@ -1,0 +1,249 @@
+/* Custom scrollbar for control sidebar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.4);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(249, 115, 22, 0.4);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(249, 115, 22, 0.7);
+}
+
+/* SVG piping animations for flows */
+@keyframes steam-flow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.steam-flow-active {
+  stroke-dasharray: 6, 4;
+  animation: steam-flow var(--flow-speed, 1s) linear infinite;
+}
+.steam-line-inactive {
+  filter: none !important;
+  stroke-dasharray: 5, 5 !important;
+  opacity: 0.35 !important;
+  transition: all 0.5s ease;
+}
+
+/* Interactive valve design */
+.valve polygon {
+  fill: #16202d;
+  stroke: #8d90a0;
+  stroke-width: 1.5px;
+  transition: all 0.3s ease;
+}
+.valve.active polygon {
+  fill: currentColor;
+  stroke: currentColor;
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+/* Schematic background grids */
+.schematic-bg {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* Pulsating red recording animation */
+@keyframes pulse-red {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+.animate-pulse-red {
+  animation: pulse-red 2.5s infinite;
+}
+
+/* Print layout settings for PDF export */
+@media print {
+  /* Hide all other direct children of body from the document flow completely */
+  body > :not(#minuta-print-section) {
+    display: none !important;
+  }
+  
+  /* Show only the designated print area */
+  #minuta-print-section {
+    display: block !important;
+    position: relative;
+    width: 100%;
+    background: white !important;
+    color: #000000 !important;
+    font-family: 'Calibri', 'Arial', sans-serif !important;
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+    padding: 0 !important;
+  }
+  
+  #minuta-print-section * {
+    visibility: visible;
+  }
+  
+  /* Watermark ENESA header in the top-right */
+  #minuta-print-header {
+    display: flex !important;
+    justify-content: flex-end;
+    font-weight: bold;
+    font-size: 12pt;
+    color: #1e3a8a;
+    border-bottom: 2px solid #1e3a8a;
+    padding-bottom: 4px;
+    margin-bottom: 20px;
+  }
+  
+  /* Typography overrides for black-and-white printing */
+  h1 { font-size: 16pt !important; color: #1e3a8a !important; border-bottom: 1px solid #cbd5e1 !important; padding-bottom: 4px !important; margin-top: 18px !important; margin-bottom: 12px !important; }
+  h2 { font-size: 13pt !important; color: #0f766e !important; border-left: 4px solid #0f766e !important; padding-left: 6px !important; margin-top: 16px !important; margin-bottom: 8px !important; }
+  h3 { font-size: 11pt !important; font-weight: bold !important; color: #1e293b !important; margin-top: 12px !important; margin-bottom: 6px !important; }
+  
+  /* Table formatting for standard print margins */
+  table { 
+    width: 100% !important; 
+    border-collapse: collapse !important; 
+    margin-top: 12px !important; 
+    margin-bottom: 12px !important; 
+    font-size: 9.5pt !important;
+    color: #111111 !important;
+    page-break-inside: avoid;
+  }
+  th { 
+    background-color: #0f172a !important; 
+    color: #ffffff !important; 
+    font-weight: bold !important; 
+    border: 1px solid #cbd5e1 !important; 
+    padding: 5px 8px !important; 
+  }
+  td { 
+    border: 1px solid #cbd5e1 !important; 
+    padding: 5px 8px !important; 
+  }
+  tr:nth-child(even) { 
+    background-color: #f8fafc !important; 
+  }
+  
+  /* Force paper size to Letter (formato carta) */
+  @page {
+    size: letter;
+    margin: 20mm;
+  }
+}
+
+/* Light theme overrides for P&ID Schematic */
+.light-theme .schematic-bg {
+  background-image: radial-gradient(circle, rgba(15, 23, 42, 0.08) 1px, transparent 1px) !important;
+}
+
+/* Equipment boxes and rects */
+.light-theme rect[fill="#0f172a"] {
+  fill: #f8fafc !important;
+  stroke: #475569 !important; /* Slate 600 */
+}
+
+/* Labels and Texts */
+.light-theme text {
+  fill: #0f172a !important; /* Slate 900 */
+}
+
+.light-theme text[fill="#ffffff"],
+.light-theme text[fill="#f8fafc"],
+.light-theme text[fill="#eef1f0"],
+.light-theme text[fill="#ffb599"],
+.light-theme text[fill="#b4c5ff"] {
+  fill: #0f172a !important;
+}
+
+/* Keeping total flow colored dynamically */
+.light-theme text[fill="#f66018"] {
+  fill: #ea580c !important; /* Slightly darker orange for better contrast on white background */
+}
+.light-theme text[fill="#22c55e"] {
+  fill: #16a34a !important; /* Slightly darker green */
+}
+.light-theme text[fill="#60a5fa"] {
+  fill: #2563eb !important; /* Darker blue */
+}
+.light-theme text[fill="#eab308"] {
+  fill: #ca8a04 !important; /* Darker yellow */
+}
+
+/* Controls like +/- buttons */
+.light-theme circle[fill="#334155"] {
+  fill: #cbd5e1 !important; /* Light gray */
+}
+.light-theme circle[fill="#334155"] + text {
+  fill: #0f172a !important;
+}
+
+/* Overlay dialogs, popups and tooltips */
+.light-theme .bg-slate-900\/95 {
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  border-color: #cbd5e1 !important;
+  color: #1e293b !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1) !important;
+}
+.light-theme .bg-slate-900\/90 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-color: #cbd5e1 !important;
+  color: #1e293b !important;
+}
+.light-theme .bg-slate-950 {
+  background-color: #f8fafc !important;
+}
+.light-theme .text-slate-300 {
+  color: #334155 !important;
+}
+.light-theme .text-slate-400 {
+  color: #64748b !important;
+}
+.light-theme .text-slate-200 {
+  color: #1e293b !important;
+}
+.light-theme .text-white {
+  color: #0f172a !important;
+}
+.light-theme .bg-slate-950 input {
+  color: #0f172a !important;
+}
+.light-theme .border-outline-variant\/20 {
+  border-color: #cbd5e1 !important;
+}
+.light-theme .border-outline-variant\/15 {
+  border-color: #cbd5e1 !important;
+}
+.light-theme .border-outline-variant\/80 {
+  border-color: #cbd5e1 !important;
+}
+.light-theme .border-outline-variant {
+  border-color: #cbd5e1 !important;
+}
+
+/* Buttons in popups */
+.light-theme .bg-slate-800 {
+  background-color: #e2e8f0 !important;
+  color: #475569 !important;
+}
+.light-theme .bg-slate-800:hover {
+  background-color: #cbd5e1 !important;
+  color: #1e293b !important;
+}
+
+/* Interactive Valves */
+.light-theme .valve polygon {
+  fill: #f1f5f9 !important;
+  stroke: #64748b !important;
+}
+.light-theme .valve.active polygon {
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+.light-theme .valve rect[fill="#050f1a"] {
+  fill: #f8fafc !important;
+  stroke: currentColor !important;
+}
+
+
